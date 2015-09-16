@@ -88,8 +88,9 @@ $(document).ready(function(){
             var value_vp = Math.floor(value / vp_price);
             if (value_vp > 0)
             {
-                result.vp -= value_vp;
-                result.max_hp -= result.level * value_vp;
+                var decr = result.level * value_vp;
+                result.vp -= (value_vp + decr);
+                result.max_hp -= decr;
                 if (result.vp > result.max_hp)
                 {
                     result.vp = result.max_hp;
@@ -113,7 +114,7 @@ $(document).ready(function(){
                 {
                     value -= (result.max_hp - result.hp);
                     result.hp = result.max_hp;
-                    if (value > vp_price && result.vp < result.max_vp) {
+                    if (value >= vp_price && result.vp < result.max_vp) {
                         result.vp += 1;
                         result.max_hp += result.level;
                         value -= vp_price;
