@@ -3,6 +3,31 @@ $(document).ready(function(){
     var dashboard_panel = $("#dashboard");
     var dashboard_table = $(".dashboard_table");
     var template_profile = dashboard_panel.find("#template_profile");
+    var prefix = "profile_";
+    var profiles = [];
+
+    var render = function()
+    {
+        dashboard_table.html('');
+
+        $(profiles).each(function(index){
+
+            var profile = this;
+            var row = template_profile.clone();
+            row.attr('data-id', profile.id);
+
+            row.find('.name').html(profile.name);
+            row.find('.level').html(profile.level);
+            row.find('.hp').html(profile.hp);
+            row.find('.max_hp').html(profile.max_hp);
+            row.find('.t_max_hp').html(profile.t_max_hp);
+            row.find('.vp').html(profile.vp);
+            row.find('.max_vp').html(profile.max_vp);
+
+            row.show();
+            dashboard_table.append(row);
+        });
+    };
 
     add_panel.hide();
     dashboard_panel.show();
@@ -25,39 +50,32 @@ $(document).ready(function(){
 
         if (name != '' && level > 0 && hp > 0 && vp > 0)
         {
-            var row = template_profile.clone();
-            row.find('.name').html(name);
-
-            var level_row = row.find('.level');
-            level_row.attr('data-level', level);
-            level_row.html(level);
-
-            var hp_row = row.find('.hp');
-            hp_row.html(hp);
-
-            var max_hp = row.find('.max_hp');
-            max_hp.html(hp);
-
-            var t_max_hp = row.find('.t_max_hp');
-            t_max_hp.html(hp);
-
-
-            var vp_max_row = row.find('.max_vp');
-            vp_max_row.html(vp);
-
-            var vp_row = row.find('.vp');
-            vp_row.html(vp);
-
-            row.show();
-            dashboard_table.append(row);
-
             add_panel.hide();
             dashboard_panel.show();
+
+            var id = Math.floor(Math.random()* 1000000);
+
+            profiles.push({
+                id: id,
+                name: name,
+                level: level,
+                hp: hp,
+                max_hp: hp,
+                t_max_hp: hp,
+                vp: vp,
+                max_vp: vp,
+            });
+
+            render();
 
             add_panel.find('form input.name').val('');
             add_panel.find('form input.level').val('');
             add_panel.find('form input.hp').val('');
             add_panel.find('form input.vp').val('');
         }
+    });
+
+    $(".btn_damage").click(function(){
+        $()
     });
 });

@@ -53,19 +53,19 @@
             <form id="add_form">
                 <div class="form-group">
                     <label>Имя</label>
-                    <input type="text" class="name form-control" placeholder="Email">
+                    <input type="text" class="name form-control">
                 </div>
                 <div class="form-group">
                     <label>Уровень</label>
-                    <input type="number" class="level form-control" value="0">
+                    <input type="number" class="level form-control" value="">
                 </div>
                 <div class="form-group">
                     <label>Максимум HP</label>
-                    <input type="number" class="hp form-control" value="0">
+                    <input type="number" class="hp form-control" value="">
                 </div>
                 <div class="form-group">
                     <label>Максимум VP</label>
-                    <input type="number" class="vp form-control" value="0">
+                    <input type="number" class="vp form-control" value="">
                 </div>
                 <button class="btn_submit" type="submit" class="btn btn-default">Добавить</button>
             </form>
@@ -78,6 +78,22 @@
 
     <div class="row">
         <div class="col-md-12">
+
+            <table>
+                <tr id="template_profile" style="display: none;">
+                    <td class="selector">
+                        <input type="checkbox" value="1">
+                    </td>
+                    <td class="name"></td>
+                    <td>
+                        <span class="hp"></span> / <span class="max_hp"></span> (<span class="t_max_hp"></span>)
+                    </td>
+                    <td>
+                        <span class="vp"></span> (<span class="max_vp"></span>)
+                    </td>
+                </tr>
+            </table>
+
             <table class="table">
                 <thead>
                     <th></th>
@@ -87,18 +103,7 @@
                 </thead>
                 <tbody class="dashboard_table">
 
-                    <tr id="template_profile" style="display: none;">
-                        <td class="selector">
-                            <input type="checkbox" value="1">
-                        </td>
-                        <td class="name"></td>
-                        <td>
-                            <span class="hp"></span> / <span class="max_hp"></span> (<span class="t_max_hp"></span>)
-                        </td>
-                        <td>
-                            <span class="vp"></span> (<span class="max_vp"></span>)
-                        </td>
-                    </tr>
+
 
                 </tbody>
             </table>
@@ -111,7 +116,7 @@
         </div>
 
         <div class="col-md-4 col-xs-2">
-            <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <button class="btn_damage" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
         </div>
         <div class="col-md-4 col-xs-3">
             <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
