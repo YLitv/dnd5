@@ -3,7 +3,6 @@ $(document).ready(function(){
     var dashboard_panel = $("#dashboard");
     var dashboard_table = $(".dashboard_table");
     var template_profile = dashboard_panel.find("#template_profile");
-    var prefix = "profile_";
     var profiles = [];
 
     var render = function()
@@ -17,6 +16,8 @@ $(document).ready(function(){
             row.attr('data-id', profile.id);
 
             row.find('.name').html(profile.name);
+            row.find('.selector input').attr('data-id', profile.id);
+
             row.find('.level').html(profile.level);
             row.find('.hp').html(profile.hp);
             row.find('.max_hp').html(profile.max_hp);
@@ -63,7 +64,7 @@ $(document).ready(function(){
                 max_hp: hp,
                 t_max_hp: hp,
                 vp: vp,
-                max_vp: vp,
+                max_vp: vp
             });
 
             render();
@@ -76,6 +77,19 @@ $(document).ready(function(){
     });
 
     $(".btn_damage").click(function(){
-        $()
+        var value = dashboard_panel.find('.control_form input[name=value]').val();
+        dashboard_table.find("input:checked:enabled").each(function(){
+           var profile_id = $(this).attr('data-id');
+            var result = $.grep(profiles, function(e){ return e.id == profile_id; });
+            result = result[0];
+            result.hp -= value;
+            var value_vp = Math.floor(value / 10);
+            if (value_vp > 0)
+            {
+                result.vp -= value_vp;
+                result.max_hp -= result.level * value_vp;
+            }
+        });
+        render();
     });
 });

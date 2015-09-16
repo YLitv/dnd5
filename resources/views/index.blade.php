@@ -53,19 +53,19 @@
             <form id="add_form">
                 <div class="form-group">
                     <label>Имя</label>
-                    <input type="text" class="name form-control">
+                    <input type="text" class="name form-control" value="test">
                 </div>
                 <div class="form-group">
                     <label>Уровень</label>
-                    <input type="number" class="level form-control" value="">
+                    <input type="number" class="level form-control" value="6">
                 </div>
                 <div class="form-group">
                     <label>Максимум HP</label>
-                    <input type="number" class="hp form-control" value="">
+                    <input type="number" class="hp form-control" value="63">
                 </div>
                 <div class="form-group">
                     <label>Максимум VP</label>
-                    <input type="number" class="vp form-control" value="">
+                    <input type="number" class="vp form-control" value="18">
                 </div>
                 <button class="btn_submit" type="submit" class="btn btn-default">Добавить</button>
             </form>
@@ -110,16 +110,16 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row control_form">
         <div class="col-md-4 col-xs-7">
             <input type="number" name="value" class="form-control" value="0">
         </div>
 
         <div class="col-md-4 col-xs-2">
-            <button class="btn_damage" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            <button type="button" class="btn_heal btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
         </div>
         <div class="col-md-4 col-xs-3">
-            <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+            <button type="button" class="btn_damage btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
         </div>
     </div>
 
