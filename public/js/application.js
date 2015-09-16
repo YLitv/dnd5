@@ -84,12 +84,12 @@ $(document).ready(function(){
            var profile_id = $(this).attr('data-id');
             var result = $.grep(profiles, function(e){ return e.id == profile_id; });
             result = result[0];
-            result.hp -= value;
             var value_vp = Math.floor(value / vp_price);
+            var decr = result.level * value_vp;
+            result.hp -= (value + decr);
             if (value_vp > 0)
             {
-                var decr = result.level * value_vp;
-                result.vp -= (value_vp + decr);
+                result.vp -= value_vp;
                 result.max_hp -= decr;
                 if (result.vp > result.max_hp)
                 {
