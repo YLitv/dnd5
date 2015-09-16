@@ -4,6 +4,7 @@ $(document).ready(function(){
     var dashboard_table = $(".dashboard_table");
     var template_profile = dashboard_panel.find("#template_profile");
     var profiles = [];
+    var vp_price = 10;
 
     var render = function()
     {
@@ -59,12 +60,12 @@ $(document).ready(function(){
             profiles.push({
                 id: id,
                 name: name,
-                level: level,
-                hp: hp,
-                max_hp: hp,
-                t_max_hp: hp,
-                vp: vp,
-                max_vp: vp
+                level: parseInt(level),
+                hp: parseInt(hp),
+                max_hp: parseInt(hp),
+                t_max_hp: parseInt(hp),
+                vp: parseInt(vp),
+                max_vp: parseInt(vp)
             });
 
             render();
@@ -78,16 +79,55 @@ $(document).ready(function(){
 
     $(".btn_damage").click(function(){
         var value = dashboard_panel.find('.control_form input[name=value]').val();
+        value = parseInt(value);
         dashboard_table.find("input:checked:enabled").each(function(){
            var profile_id = $(this).attr('data-id');
             var result = $.grep(profiles, function(e){ return e.id == profile_id; });
             result = result[0];
             result.hp -= value;
-            var value_vp = Math.floor(value / 10);
+            var value_vp = Math.floor(value / vp_price);
             if (value_vp > 0)
             {
                 result.vp -= value_vp;
                 result.max_hp -= result.level * value_vp;
+                if (result.vp > result.max_hp)
+                {
+                    result.vp = result.max_hp;
+                }
+            }
+        });
+        render();
+    });
+
+    $(".btn_heal").click(function(){
+        var value = dashboard_panel.find('.control_form input[name=value]').val();
+        value = parseInt(value);
+        dashboard_table.find("input:checked:enabled").each(function(){
+           var profile_id = $(this).attr('data-id');
+            var result = $.grep(profiles, function(e){ return e.id == profile_id; });
+            result = result[0];
+
+            while(Math.floor(value / vp_price) > 0)
+            {
+                if (result.hp + value > result.max_hp)
+                {
+                    value -= (result.max_hp - result.hp);
+                    result.hp = result.max_hp;
+                    if (value > vp_price && result.vp < result.max_vp) {
+                        result.vp += 1;
+                        result.max_hp += result.level;
+                        value -= vp_price;
+                    }
+                } else {
+                    result.hp += value;
+                    value = 0;
+                }
+            }
+
+            result.hp += value;
+            if (result.hp > result.max_hp)
+            {
+                result.hp = result.max_hp;
             }
         });
         render();
