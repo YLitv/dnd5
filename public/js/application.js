@@ -35,15 +35,16 @@ $(document).ready(function(){
             var hp_row = row.find('.hp');
             hp_row.html(hp);
 
-            var max_vp = row.find('.max_vp');
-            max_vp.html(hp);
+            var max_hp = row.find('.max_hp');
+            max_hp.html(hp);
 
-            var t_max_vp = row.find('.t_max_vp');
-            t_max_vp.html(hp);
+            var t_max_hp = row.find('.t_max_hp');
+            t_max_hp.html(hp);
 
 
             var vp_max_row = row.find('.max_vp');
-            vp_max_row.html(hp);
+            vp_max_row.html(vp);
+
             var vp_row = row.find('.vp');
             vp_row.html(vp);
 

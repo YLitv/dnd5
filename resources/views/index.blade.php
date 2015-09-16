@@ -93,7 +93,7 @@
                         </td>
                         <td class="name"></td>
                         <td>
-                            <span class="vp"></span> / <span class="max_vp"></span> (<span class="t_max_vp"></span>)
+                            <span class="hp"></span> / <span class="max_hp"></span> (<span class="t_max_hp"></span>)
                         </td>
                         <td>
                             <span class="vp"></span> (<span class="max_vp"></span>)
