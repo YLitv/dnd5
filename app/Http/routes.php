@@ -14,3 +14,9 @@
 $app->get('/', function () use ($app) {
     return $app->welcome();
 });
+
+$app->get('/{id}', function ($id) use ($app)
+{
+    $data = [];
+    return view('index', $data);
+});
