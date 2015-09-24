@@ -31,6 +31,59 @@ $(document).ready(function(){
         });
     };
 
+    vpMod = function(vp)
+    {
+        var result = 0;
+        switch (vp) {
+            case 20:
+            case 19:
+                result = 5;
+                break;
+            case 18:
+            case 17:
+                result = 4;
+                break;
+            case 16:
+            case 15:
+                result = 3;
+                break;
+            case 14:
+            case 13:
+                result = 2;
+                break;
+            case 12:
+            case 11:
+                result = 1;
+                break;
+            case 0:
+            case 1:
+                result = -5;
+                break;
+            case 2:
+            case 3:
+                result = -4;
+                break;
+            case 4:
+            case 5:
+                result = -3;
+                break;
+            case 6:
+            case 7:
+                result = -2;
+                break;
+            case 8:
+            case 9:
+                result = -1;
+                break;
+        }
+        return result;
+    };
+
+    getVpMod = function(vp, max_vp)
+    {
+        return vpMod(max_vp) - vpMod(vp);
+    };
+
     add_panel.hide();
     dashboard_panel.show();
 
@@ -85,8 +138,14 @@ $(document).ready(function(){
             var result = $.grep(profiles, function(e){ return e.id == profile_id; });
             result = result[0];
             var value_vp = Math.floor(value / vp_price);
-            var decr = result.level * value_vp;
+            var vp_mod = 1;
+            var decr = vp_mod * result.level * value_vp;
             result.hp -= (value + decr);
+            if (result.hp < 0)
+            {
+                value_vp = Math.abs(result.hp);
+                result.hp = 0;
+            }
             if (value_vp > 0)
             {
                 result.vp -= value_vp;
