@@ -143,7 +143,7 @@ $(document).ready(function(){
             result.hp -= value;
             if (result.hp < 0) {
                 value_vp = value;
-                //result.hp = 0;
+                result.hp = 0;
             }
              else {
                 result.hp -= decr;
@@ -157,6 +157,9 @@ $(document).ready(function(){
                 {
                     result.vp = result.max_vp;
                 }
+            }
+            if (result.max_hp < 0 ) {
+                result.max_hp = 0;
             }
         });
         render();
