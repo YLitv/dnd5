@@ -150,9 +150,9 @@ $(document).ready(function(){
             {
                 result.vp -= value_vp;
                 result.max_hp -= result.level * value_vp;
-                if (result.vp > result.max_hp)
+                if (result.vp > result.max_vp)
                 {
-                    result.vp = result.max_hp;
+                    result.vp = result.max_vp;
                 }
             }
         });
