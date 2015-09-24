@@ -149,7 +149,7 @@ $(document).ready(function(){
             if (value_vp > 0)
             {
                 result.vp -= value_vp;
-                result.max_hp -= level * value_vp;
+                result.max_hp -= result.level * value_vp;
                 if (result.vp > result.max_hp)
                 {
                     result.vp = result.max_hp;
