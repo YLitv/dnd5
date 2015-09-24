@@ -140,11 +140,13 @@ $(document).ready(function(){
             var value_vp = Math.floor(value / vp_price);
             var vp_mod = 1;
             var decr = vp_mod * result.level * value_vp;
-            result.hp -= (value + decr);
-            if (result.hp < 0)
-            {
+            result.hp -= value;
+            if (result.hp < 0) {
                 value_vp = value;
-                result.hp = 0;
+                //result.hp = 0;
+            }
+             else {
+                result.hp -= decr;
             }
             if (value_vp > 0)
             {
