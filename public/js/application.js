@@ -143,7 +143,7 @@ $(document).ready(function(){
             result.hp -= (value + decr);
             if (result.hp < 0)
             {
-                value_vp = Math.abs(result.hp);
+                value_vp = value;
                 result.hp = 0;
             }
             if (value_vp > 0)
