@@ -156,6 +156,11 @@ $(document).ready(function(){
                 {
                     result.vp = result.max_vp;
                 }
+
+                if (result.vp < 0)
+                {
+                    result.vp = 0;
+                }
             }
             if (result.max_hp < 0 ) {
                 result.max_hp = 0;
