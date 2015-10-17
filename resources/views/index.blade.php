@@ -34,7 +34,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Главная</a></li>
-                <li><a class="btn_add" href="#add">Добавить пексонажа</a></li>
+                <li><a class="btn_add" href="#add">Добавить персонажа</a></li>
                 <!-- <li><a class="btn_refresh" href="#refresh">Обнулить</a></li> -->
             </ul>
         </div><!--/.nav-collapse -->

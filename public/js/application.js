@@ -210,6 +210,9 @@ $(document).ready(function(){
             if (result.hp < 0 ) {
                 result.hp = 0;
             }
+            if (result.hp >  result.max_hp) {
+                result.hp = result.max_hp;
+            }
         });
         render();
     });
