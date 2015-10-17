@@ -173,10 +173,11 @@ $(document).ready(function(){
     });
 
     $(".btn_heal").click(function(){
-        var value = dashboard_panel.find('.control_form input[name=value]').val();
-        value = parseInt(value);
+        var base_value = dashboard_panel.find('.control_form input[name=value]').val();
+        base_value = parseInt(value);
         dashboard_table.find("input:checked:enabled").each(function(){
-           var profile_id = $(this).attr('data-id');
+            var value = base_value;
+            var profile_id = $(this).attr('data-id');
             var result = $.grep(profiles, function(e){ return e.id == profile_id; });
             result = result[0];
 
@@ -190,7 +191,10 @@ $(document).ready(function(){
                         result.vp += 1;
                         result.max_hp += result.level;
                         value -= vp_price;
+                    } else if (result.max_hp == result.hp && result.max_vp == result.vp) {
+                        value = 0;
                     }
+
                 } else {
                     result.hp += value;
                     value = 0;
