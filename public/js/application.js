@@ -255,7 +255,10 @@ $(document).ready(function(){
                     result.hp = result.max_hp;
                 }
             } else {
-                result.vp += Math.ceil(value / 10);
+                var vp = Math.ceil(value / 10);
+                result.vp += vp;
+                var vp_mod = getVpMod(result.vp, result.max_vp);
+                result.max_hp += vp_mod * vp * result.level;
                 if (result.vp > result.max_vp)
                 {
                     result.vp = result.max_vp;
