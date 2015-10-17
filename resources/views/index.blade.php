@@ -74,7 +74,7 @@
     </div>
 </div>
 
-<div class="container" id="dashboard">
+<div class="container" id="dashboard" data-storage="{{$storage_id}}">
 
     <div class="row">
         <div class="col-md-12">
@@ -131,6 +131,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/js/jquery.cookie.js"></script>
 <script src="/js/application.js"></script>
 
 </body>

@@ -17,6 +17,8 @@ $app->get('/', function () use ($app) {
 
 $app->get('/{id}', function ($id) use ($app)
 {
-    $data = [];
+    $data = [
+        'storage_id' => $id,
+    ];
     return view('index', $data);
 });

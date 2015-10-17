@@ -3,13 +3,34 @@ $(document).ready(function(){
     var dashboard_panel = $("#dashboard");
     var dashboard_table = $(".dashboard_table");
     var template_profile = dashboard_panel.find("#template_profile");
-    var profiles = [];
     var vp_price = 10;
+
+    var storage_id = $(dashboard_panel).attr('data-storage');
+
+    var loadProfiles = function(storage_id)
+    {
+        var data = $.cookie(storage_id);
+        if (data === undefined)
+        {
+            data = [];
+        } else {
+            data = JSON.parse(data);
+        }
+        return data;
+    };
+
+    var saveProfiles = function(storage_id, profiles)
+    {
+        $.cookie(storage_id, JSON.stringify(profiles));
+    };
+
+
+    var profiles = loadProfiles(storage_id);
 
     var render = function()
     {
         dashboard_table.html('');
-
+        saveProfiles(storage_id,profiles);
         $(profiles).each(function(index){
 
             var profile = this;
@@ -31,7 +52,7 @@ $(document).ready(function(){
         });
     };
 
-    vpMod = function(vp)
+    var vpMod = function(vp)
     {
         var result = 0;
         switch (vp) {
@@ -79,13 +100,16 @@ $(document).ready(function(){
         return result;
     };
 
-    getVpMod = function(vp, max_vp)
+    var getVpMod = function(vp, max_vp)
     {
-        return vpMod(max_vp) - vpMod(vp);
+        return 1;
+        //return vpMod(max_vp) - vpMod(vp);
     };
 
     add_panel.hide();
     dashboard_panel.show();
+
+    render();
 
     $(".btn_add").click(function(){
         dashboard_panel.hide();
@@ -138,7 +162,7 @@ $(document).ready(function(){
             var result = $.grep(profiles, function(e){ return e.id == profile_id; });
             result = result[0];
             var value_vp = Math.floor(value / vp_price);
-            var vp_mod = 1;
+            var vp_mod = getVpMod(result.vp, result.max_vp);
             var decr = vp_mod * result.level * value_vp;
             result.hp -= value;
             if (result.hp < 0) {
