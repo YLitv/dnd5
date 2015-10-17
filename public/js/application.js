@@ -174,7 +174,7 @@ $(document).ready(function(){
 
     $(".btn_heal").click(function(){
         var base_value = dashboard_panel.find('.control_form input[name=value]').val();
-        base_value = parseInt(value);
+        base_value = parseInt(base_value);
         dashboard_table.find("input:checked:enabled").each(function(){
             var value = base_value;
             var profile_id = $(this).attr('data-id');
