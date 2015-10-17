@@ -111,15 +111,35 @@
     </div>
 
     <div class="row control_form">
-        <div class="col-md-4 col-xs-7">
+        <div class="col-md-8 col-xs-8">
             <input type="number" name="value" class="form-control" value="0">
         </div>
-
-        <div class="col-md-4 col-xs-2">
+        <div class="col-md-2 col-xs-2">
             <button type="button" class="btn_heal btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
         </div>
-        <div class="col-md-4 col-xs-3">
+        <div class="col-md-2 col-xs-2">
             <button type="button" class="btn_damage btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+        </div>
+    </div>
+
+    <div class="row control_form">
+        <div class="col-md-2 col-xs-2">
+            Крит
+        </div>
+
+        <div class="col-md-2 col-xs-2">
+            <input type="checkbox" value="0" class="form-control" name="is_critical">
+        </div>
+
+        <div class="col-md-2 col-xs-2">
+            Трансформа
+        </div>
+
+        <div class="col-md-2 col-xs-2">
+            <input type="checkbox" value="0" class="form-control" name="is_transform">
+        </div>
+
+        <div class="col-md-4 col-xs-4">
         </div>
     </div>
 

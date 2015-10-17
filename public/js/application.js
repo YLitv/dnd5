@@ -4,6 +4,7 @@ $(document).ready(function(){
     var dashboard_table = $(".dashboard_table");
     var template_profile = dashboard_panel.find("#template_profile");
     var vp_price = 10;
+    var critical_mod = 2;
 
     var storage_id = $(dashboard_panel).attr('data-storage');
 
@@ -157,20 +158,37 @@ $(document).ready(function(){
     $(".btn_damage").click(function(){
         var value = dashboard_panel.find('.control_form input[name=value]').val();
         value = parseInt(value);
+        var is_transform = dashboard_panel.find('.control_form input[name=is_transform]').is(":checked") == true;
+        var is_critical = dashboard_panel.find('.control_form input[name=is_critical]').is(":checked") == true;
         dashboard_table.find("input:checked:enabled").each(function(){
            var profile_id = $(this).attr('data-id');
             var result = $.grep(profiles, function(e){ return e.id == profile_id; });
             result = result[0];
             var value_vp = Math.floor(value / vp_price);
+
+            if (is_critical)
+            {
+                if (value_vp > 0) {
+                    value_vp *= critical_mod;
+                } else {
+                    value_vp = 1;
+                }
+            }
+
             var vp_mod = getVpMod(result.vp, result.max_vp);
             var decr = vp_mod * result.level * value_vp;
-            result.hp -= value;
-            if (result.hp < 0) {
-                value_vp = value;
+
+            if (!is_transform)
+            {
+                result.hp -= value;
+                if (result.hp < 0) {
+                    value_vp = value;
+                }
+                else {
+                    result.hp -= decr;
+                }
             }
-             else {
-                result.hp -= decr;
-            }
+
             if (value_vp > 0)
             {
                 result.vp -= value_vp;
@@ -199,37 +217,49 @@ $(document).ready(function(){
     $(".btn_heal").click(function(){
         var base_value = dashboard_panel.find('.control_form input[name=value]').val();
         base_value = parseInt(base_value);
+        var is_transform = dashboard_panel.find('.control_form input[name=is_transform]').is(":checked") == true;
         dashboard_table.find("input:checked:enabled").each(function(){
             var value = base_value;
             var profile_id = $(this).attr('data-id');
             var result = $.grep(profiles, function(e){ return e.id == profile_id; });
             result = result[0];
 
-            while(Math.floor(value / vp_price) > 0)
+            if (!is_transform)
             {
-                if (result.hp + value > result.max_hp)
+                while(Math.floor(value / vp_price) > 0)
                 {
-                    value -= (result.max_hp - result.hp);
-                    result.hp = result.max_hp;
-                    if (value >= vp_price && result.vp < result.max_vp) {
-                        result.vp += 1;
-                        result.max_hp += result.level;
-                        value -= vp_price;
-                    } else if (result.max_hp == result.hp && result.max_vp == result.vp) {
+                    if (result.hp + value > result.max_hp)
+                    {
+                        value -= (result.max_hp - result.hp);
+                        result.hp = result.max_hp;
+                        if (value >= vp_price && result.vp < result.max_vp) {
+                            result.vp += 1;
+                            result.max_hp += result.level;
+                            value -= vp_price;
+                        } else if (result.max_hp == result.hp && result.max_vp == result.vp) {
+                            value = 0;
+                        }
+
+                    } else {
+                        result.hp += value;
                         value = 0;
                     }
+                }
 
-                } else {
-                    result.hp += value;
-                    value = 0;
+                result.hp += value;
+                if (result.hp > result.max_hp)
+                {
+                    result.hp = result.max_hp;
+                }
+            } else {
+                result.vp += Math.ceil(value / 10);
+                if (result.vp > result.max_vp)
+                {
+                    result.vp = result.max_vp;
                 }
             }
 
-            result.hp += value;
-            if (result.hp > result.max_hp)
-            {
-                result.hp = result.max_hp;
-            }
+
         });
         render();
     });
